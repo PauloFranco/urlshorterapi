@@ -50,7 +50,7 @@ class GenerateHash implements ShouldQueue
         $hash = md5($key.$this->string);
         $substring = substr($hash,0,4);
 
-        $hashed_url = ShortUrl::where('hash', $substring)->first();
+        $hashed_url = ShortUrl::where('hash', $substring)->orWhere('full_url', $this->string)->first();
 
         if($hashed_url){
 
